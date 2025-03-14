@@ -2,6 +2,20 @@
 using namespace std;
 
 
+int gcd(int a, int b){
+
+
+    while(b != 0){
+        int temp = b;
+        b = a % b;
+        a = temp; 
+    }
+    return a;
+}
+
+
+
+
 class Rational{
 
     private: 
@@ -10,16 +24,26 @@ class Rational{
 
     public:
         
+        void simplify(){
+            int common = gcd(num, den);
+
+            num /= common;
+            den /= common;
+        }
+    
+
         Rational(int num, int den){
                 this->num = num;
                 if(den == 0){
-                    cerr << "123";
+                    cerr << "знаменатель должен быть больше нуля";
                 } 
                 this->den = den;
+                simplify();
         }
 
         ~Rational(){}
 
+        
         int getNum(){ return num; }
 
         int geDen(){ return den; }
@@ -30,12 +54,15 @@ class Rational{
 
         void print(){ cout << num << "/" << den << endl; }
 
-        Rational transformation(int n){
-            
-            int diff = n / den;            
-            this->num *= diff;
-            this->den *= diff;
-            return *this; 
+        Rational operator+(Rational other){
+            if(this->den == other.den){
+                return {this->num + other.num, this->den};
+            } else {
+                other.num *= this->den;
+                this->num *= other.den;
+                this->den *= other.den;
+                return {this->num + other.num, this->den};
+            }
         }
 
 
@@ -47,8 +74,16 @@ int main(){
 
     Rational rat = {1, 2};
     rat.print();
+    
+    cout << "+\n";
 
-    rat.transformation(3);
-    rat.print();
+    Rational rat2 = {2, 3};
+    rat2.print();
 
+    cout << "=\n";
+
+    Rational ratres = {rat + rat2};
+    ratres.print();
+
+    return 0;
 }
