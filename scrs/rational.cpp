@@ -65,6 +65,38 @@ class Rational{
             }
         }
 
+        Rational operator-(Rational other){
+            if(this->den == other.den){
+                return {this->num - other.num, this->den};
+            } else {
+                other.num *= this->den;
+                this->num *= other.den;
+                this->den *= other.den;
+                return {this->num - other.num, this->den};
+            }
+        }
+
+        string operator[](string index) const{
+            if(index == "num"){
+                return to_string(num);
+            } else if(index == "den"){
+                return to_string(den);
+            } else {
+                return "Invalid index";
+            }
+
+            
+             
+             
+                 
+            
+        }
+    
+
+        operator int() const { return num / den; }
+
+        operator bool() const { return num != 0;}
+
 
 
 };
@@ -74,16 +106,18 @@ int main(){
 
     Rational rat = {1, 2};
     rat.print();
-    
-    cout << "+\n";
 
-    Rational rat2 = {2, 3};
+    cout << "-\n";
+
+    Rational rat2 = {1, 4};
     rat2.print();
 
     cout << "=\n";
 
-    Rational ratres = {rat + rat2};
+    Rational ratres = {rat - rat2};
     ratres.print();
 
+
+    
     return 0;
 }
