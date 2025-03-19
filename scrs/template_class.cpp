@@ -7,7 +7,7 @@ template <typename T>
 class Creature {
 private:
   T id;
-  T* ptr = &id; // инициализация ptr
+  T* ptr = &id; 
 
 public:
   Creature(T id) : id(id) {}
@@ -16,8 +16,7 @@ public:
     cout << "Creature id: " << id << " ptr: " << ptr << endl;
   }
 
-    T getId() const { return id; } // Добавлено для доступа к id
-};
+    T getId() const { return id; } // 
 
 template <>
 class Creature<unsigned> {
@@ -36,14 +35,14 @@ public:
   void print() {
     cout << "Creature id: " << id << " ptr: " << ptr << endl;
   }
-  unsigned getId() const { return id; } // Добавлено для доступа к id
+  unsigned getId() const { return id; } 
 };
 
 template<> unsigned Creature<unsigned>::count = 0;
 
 
 template <typename T>
-class Person : public Creature<T> { // Наследуемся от Creature<T>
+class Person : public Creature<T> { 
 private:
   string name;
 
@@ -51,7 +50,7 @@ public:
   Person(T id, string name) : Creature<T>(id), name(name) {}
 
   void print() {
-    cout << "Person id: " << this->getId() << " name: " << name << endl; // Используем getId()
+    cout << "Person id: " << this->getId() << " name: " << name << endl; 
   }
 };
 
