@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        if (s.size() < 2 || s[0] == ')' || s[0] == ']' || s[0] == '}'){ return false;}
+        stack<char> stack;
+        for(char elem : s){
+            cout << elem;
+            if(elem == ')') {
+                if(stack.empty()){return false;}
+                else if (stack.top() == '('){stack.pop();} 
+                else{return false;}
+            } 
+            else if(elem == ']') {
+                if(stack.empty()){return false;}
+                else if (stack.top() == '['){stack.pop();} 
+                else{return false;}
+            }
+            else if(elem == '}') {
+                if(stack.empty()){return false;}
+                else if (stack.top() == '{'){stack.pop();} 
+                else{return false;}
+            }
+            else{
+                stack.push(elem);
+            }
+        }
+        return stack.empty();
+    }
+};
