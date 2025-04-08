@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+#define MAX(a, b) ((a) >= (b) ? (a) : (b))
+#define SWAP(type, a, b) { type temp = a; a = b; b = temp; }
+#define PRINTN(value) printf("%s", #value)
+#define SUM(type) type sum_##type (type a, type b) { type result = a + b; return result; } 
+using namespace std;
+
+
+SUM(int)
+SUM(string)
+
+int main() {
+    int num1 = 4;
+    int num2 = 7;
+    
+    PRINTN(num1);
+    cout << " -> " << num1 << endl;
+    
+    PRINTN(num2);
+    cout << " -> " << num2 << endl;  
+    
+    SWAP(int, num1, num2);
+    cout << "MAX num : " << MAX(num1, num2) << endl;
+    
+
+    cout << sum_int(5, 3) << endl;
+    cout << sum_string("qwe", "rty") << endl;    
+  
+    return 0;
+}
