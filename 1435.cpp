@@ -4,13 +4,20 @@
 #include <QString>
 #include <QList>
 #include <QPushButton>
-#include <QDebug>
 
-void onClick();
+
 QPushButton* button = nullptr;
 QList<QString>* list = nullptr;
+int count = -1;
 
-int main(int argc, char *argv[]){
+void onClick() {
+
+    count += 1;
+    button->setText(list->at(count));
+
+}
+
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
     QWidget widget;
@@ -19,25 +26,11 @@ int main(int argc, char *argv[]){
     widget.setMinimumHeight(400);
     widget.setMaximumWidth(600);
 
-
-
-    QList<QString>* list = new QList<QString>({"i", "love", "you"});
-    QPushButton* button = new QPushButton("click", &widget);
-    QAbstractButton::connect(button, &QPushButton::clicked, onClick);
-    list->push_back("nastya");
+    list = new QList<QString>({"i", "love", "you", "!"});
+    button = new QPushButton("click", &widget);
+    QObject::connect(button, &QPushButton::clicked, onClick);
 
     widget.show();
 
-
     return a.exec();
-
-}
-
-static int count = -1;
-
-void onClick(){
-
-    count += 1;
-    button->setText(list->at(count));
-    qDebug() << "clicked";
 }
